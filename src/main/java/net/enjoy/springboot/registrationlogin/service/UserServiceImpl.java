@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserDto userDto) {
         User user = new User();
-        user.setName(userDto.getFirstName() + " " + userDto.getLastName());
+        user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         //encrypt the password using spring security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -38,15 +38,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> findAllUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream().map((user) -> convertEntityToDto(user))
+        return users.stream().map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
     private UserDto convertEntityToDto(User user) {
         UserDto userDto = new UserDto();
-        String[] name = user.getName().split(" ");
-        userDto.setFirstName(name[0]);
-        userDto.setLastName(name[1]);
+        userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
         return userDto;
     }
