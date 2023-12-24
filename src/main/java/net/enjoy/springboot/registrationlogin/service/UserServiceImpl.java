@@ -1,9 +1,7 @@
 package net.enjoy.springboot.registrationlogin.service;
 
 import net.enjoy.springboot.registrationlogin.dto.UserDto;
-import net.enjoy.springboot.registrationlogin.entity.Role;
 import net.enjoy.springboot.registrationlogin.entity.User;
-import net.enjoy.springboot.registrationlogin.repository.RoleRepository;
 import net.enjoy.springboot.registrationlogin.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,12 +12,10 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
-    private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -31,20 +27,9 @@ public class UserServiceImpl implements UserService {
         //encrypt the password using spring security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        Role role = roleRepository.findByName("ROLE_USER");
-        if (role == null) {
-            role = checkRoleExist();
-        }
-        user.setRoles(List.of(role));
+        user.setRole("ROLE_USER");
         userRepository.save(user);
     }
-
-    private Role checkRoleExist() {
-        Role role = new Role();
-        role.setName("ROLE_USER");
-        return roleRepository.save(role);
-    }
-
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
