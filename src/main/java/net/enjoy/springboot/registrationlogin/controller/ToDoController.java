@@ -41,7 +41,7 @@ public class ToDoController {
     public String addNewToDoPage(@Valid ToDo todo, BindingResult result){
 
         if(result.hasErrors()) {
-            LoggerFactory.getLogger(ToDoController.class).warn("Sth wrong here");
+//            LoggerFactory.getLogger(ToDoController.class).warn("Sth wrong here");
             return "todo";
         }
 

@@ -24,6 +24,8 @@ public class UserDto {
     @Email
     private String email;
 
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+    message = "must have at least: 1 small letter, 1 uppercase letter, 1 number, " +
+            "1 special character & at least 8 characters (total) ")
     private String password;
 }

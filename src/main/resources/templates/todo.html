@@ -28,6 +28,9 @@
             <div class="invalid-feedback" th:if="${#fields.hasErrors('targetDate')}"
                  th:errors="*{targetDate}"></div>
         </div>
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{done}"/>
+
 
         <button type="submit" class="btn btn-primary">Add Todo</button>
     </form>
