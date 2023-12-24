@@ -1,31 +1,29 @@
 package net.enjoy.springboot.registrationlogin.controller;
 
 import jakarta.validation.Valid;
-//import org.springframework.security.core.context.SecurityContextHolder;
+import net.enjoy.springboot.registrationlogin.entity.ToDo;
+import net.enjoy.springboot.registrationlogin.service.ToDoService;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 @SessionAttributes("name")
 public class ToDoController {
 
 
-    private final ToDoRepository toDoRepository;
+    private final ToDoService toDoService;
 
-    public ToDoController(ToDoRepository toDoRepository) {
-        this.toDoRepository = toDoRepository;
+    public ToDoController(ToDoService toDoService) {
+        this.toDoService = toDoService;
     }
+
 
     @RequestMapping("list-todos")
     public String listAllTodos(ModelMap modelMap){
-
-        List<ToDo> todos =  toDoRepository.findByUsername("Karol");
-        modelMap.addAttribute("todos", todos);
+        modelMap.addAttribute("todos", toDoService.getAllToDos());
 
         return "listToDo";
     }
@@ -34,37 +32,32 @@ public class ToDoController {
     //GET, POST
     @GetMapping("add-todo")
     public String showNewToDoPage(ModelMap modelMap){
-        ToDo todo = new ToDo(0, "Karol", "",
-                LocalDate.now().plusYears(1), false);
-        modelMap.put("todo", todo);
+
+        modelMap.put("todo", toDoService.generateEmptyToDo());
         return "todo";
     }
 
-    @RequestMapping(value = "add-todo", method = RequestMethod.POST)
+    @PostMapping(value = "add-todo")
     public String addNewToDoPage(@Valid ToDo todo, BindingResult result){
 
         if(result.hasErrors()) {
+            LoggerFactory.getLogger(ToDoController.class).warn("Sth wrong here");
             return "todo";
         }
 
-        todo.setUsername("Karol");
-//        todo.setUsername(getLoggedInUsername());
-        toDoRepository.save(todo);
+        toDoService.addToDo(todo);
         return "redirect:list-todos";
     }
 
     @RequestMapping("delete-todo")
-    public String deleteToDo(@RequestParam int id){
-        toDoRepository.deleteById(id);
+    public String deleteToDo(@RequestParam long id){
+        toDoService.deleteToDo(id);
         return "redirect:list-todos";
     }
 
-
-    //GET, POST
     @GetMapping(value = "update-todo")
-    public String showUpdateToDoPage(@RequestParam int id, ModelMap modelMap){
-        var todo = toDoRepository.findById(id).get();
-        modelMap.addAttribute("todo", todo);
+    public String showUpdateToDoPage(@RequestParam long id, ModelMap modelMap){
+        modelMap.addAttribute("todo", toDoService.getToDo(id));
         return "todo";
     }
 
@@ -73,15 +66,7 @@ public class ToDoController {
 
         if(result.hasErrors()) return "todo";
 
-        todo.setUsername("Karol");
-//        todo.setUsername(getLoggedInUsername());
-        toDoRepository.save(todo);
-
+        toDoService.addToDo(todo);
         return "redirect:list-todos";
     }
-
-//    private static String getLoggedInUsername() {
-//        return SecurityContextHolder.getContext().getAuthentication().getName();
-//    }
-
 }
