@@ -13,22 +13,22 @@ import java.util.List;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserService userService;
+    private UserService userService;
 
     public CustomUserDetailsService(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findUserByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userService.findUserByEmail(email);
 
         if (user != null) {
-            return new org.springframework.security.core.userdetails.User(user.getUsername(),
+            return new org.springframework.security.core.userdetails.User(user.getEmail(),
                     user.getPassword(),
                     List.of(new SimpleGrantedAuthority(user.getRole())));
         } else {
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("Invalid email or password.");
         }
     }
 }

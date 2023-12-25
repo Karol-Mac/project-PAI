@@ -6,9 +6,6 @@ import net.enjoy.springboot.registrationlogin.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
@@ -31,21 +28,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
     @Override
-    public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
-    }
-
-    @Override
-    public List<UserDto> findAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map(this::convertEntityToDto)
-                .collect(Collectors.toList());
-    }
-
-    private UserDto convertEntityToDto(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setUsername(user.getUsername());
-        userDto.setEmail(user.getEmail());
-        return userDto;
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 }

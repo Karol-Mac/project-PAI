@@ -1,7 +1,9 @@
 package net.enjoy.springboot.registrationlogin.service;
 
 import net.enjoy.springboot.registrationlogin.entity.ToDo;
+import net.enjoy.springboot.registrationlogin.entity.User;
 import net.enjoy.springboot.registrationlogin.repository.ToDoRepository;
+import net.enjoy.springboot.registrationlogin.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,11 @@ public class ToDoServiceImpl implements ToDoService{
 
     private final ToDoRepository toDoRepository;
 
-    public ToDoServiceImpl(ToDoRepository toDoRepository) {
+    private final UserRepository userRepository;
+
+    public ToDoServiceImpl(ToDoRepository toDoRepository, UserRepository userRepository) {
         this.toDoRepository = toDoRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -44,8 +49,12 @@ public class ToDoServiceImpl implements ToDoService{
         toDoRepository.deleteById(id);
     }
 
-    private static String getLoggedInUsername() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+    private String getLoggedInUsername() {
+
+        var user = userRepository.findByEmail(SecurityContextHolder.getContext()
+                                    .getAuthentication().getName()).orElse(null);
+
+        return user.getUsername();
     }
 
 }

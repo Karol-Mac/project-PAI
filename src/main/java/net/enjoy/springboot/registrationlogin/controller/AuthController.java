@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @SessionAttributes("name")
 public class AuthController {
@@ -24,13 +22,15 @@ public class AuthController {
     // handler method to handle home page request
     @GetMapping("/index")
     public String home(Model model) {
-        model.addAttribute("name", getLoggedUsername());
+        User user = userService.findUserByEmail(getLoggedEmail());
+        model.addAttribute("name", user.getUsername());
         return "index";
     }
 
     @GetMapping("/")
     public String goHome(Model model) {
-        model.addAttribute("name", getLoggedUsername());
+        User user = userService.findUserByEmail(getLoggedEmail());
+        model.addAttribute("name", user.getUsername());
         return "index";
     }
 
@@ -48,17 +48,13 @@ public class AuthController {
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
                                Model model) {
-        User existingUser = userService.findUserByUsername(userDto.getUsername());
+        User existingUser = userService.findUserByEmail(userDto.getUsername());
 
-        if (existingUser != null){
-            if (existingUser.getUsername() != null && !existingUser.getUsername().isEmpty()) {
-                result.rejectValue("username", null,
-                        "There is already an account registered with the same username");
-            }
-            else if (existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()) {
-                result.rejectValue("email", null,
-                        "There is already an account registered with the same email");
-            }
+        if (existingUser != null && existingUser.getEmail() != null
+                            && !existingUser.getEmail().isEmpty()) {
+            result.rejectValue("email", null,
+                    "There is already an account registered with the same email");
+
         }
 
         if (result.hasErrors()) {
@@ -70,21 +66,13 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
-    // handler method to handle list of users
-    @GetMapping("/hello")
-    public String users(Model model) {
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "hello";
-    }
-
     // handler method to handle login request
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    private String getLoggedUsername(){
+    private String getLoggedEmail(){
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
