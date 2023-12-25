@@ -24,7 +24,9 @@ public class ToDoServiceImpl implements ToDoService{
 
     @Override
     public List<ToDo> getAllToDos() {
-        return toDoRepository.findByUsername(getLoggedInUsername());
+
+        return toDoRepository.findByUser(getLoggedInUser());
+
     }
 
     @Override
@@ -34,14 +36,14 @@ public class ToDoServiceImpl implements ToDoService{
 
     @Override
     public void addToDo(ToDo todo) {
-        todo.setUsername(getLoggedInUsername());
+        todo.setUser(getLoggedInUser());
         toDoRepository.save(todo);
     }
 
     @Override
     public ToDo generateEmptyToDo() {
-        return new ToDo(0, getLoggedInUsername(), "",
-                LocalDate.now().plusYears(1), false);
+        return new ToDo(0, "",LocalDate.now().plusYears(1),
+                        false, getLoggedInUser());
     }
 
     @Override
@@ -49,12 +51,10 @@ public class ToDoServiceImpl implements ToDoService{
         toDoRepository.deleteById(id);
     }
 
-    private String getLoggedInUsername() {
+    private User getLoggedInUser() {
 
-        var user = userRepository.findByEmail(SecurityContextHolder.getContext()
+        return userRepository.findByEmail(SecurityContextHolder.getContext()
                                     .getAuthentication().getName()).orElse(null);
-
-        return user.getUsername();
     }
 
 }

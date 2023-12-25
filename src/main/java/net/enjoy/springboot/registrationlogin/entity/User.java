@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,8 +15,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class User {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +30,8 @@ public class User {
     private String password;
 
     private String role;
+
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ToDo> toDos;
 }
