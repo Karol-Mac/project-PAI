@@ -1,7 +1,7 @@
-package net.enjoy.springboot.registrationlogin.repository;
+package example.project.pai.repository;
 
-import net.enjoy.springboot.registrationlogin.entity.ToDo;
-import net.enjoy.springboot.registrationlogin.entity.User;
+import example.project.pai.entity.ToDo;
+import example.project.pai.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

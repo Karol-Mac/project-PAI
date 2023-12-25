@@ -1,8 +1,8 @@
-package net.enjoy.springboot.registrationlogin.service;
+package example.project.pai.service;
 
-import net.enjoy.springboot.registrationlogin.dto.UserDto;
-import net.enjoy.springboot.registrationlogin.entity.User;
-import net.enjoy.springboot.registrationlogin.repository.UserRepository;
+import example.project.pai.dto.UserDto;
+import example.project.pai.repository.UserRepository;
+import example.project.pai.entity.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package net.enjoy.springboot.registrationlogin.entity;
+package example.project.pai.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;

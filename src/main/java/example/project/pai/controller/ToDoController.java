@@ -1,9 +1,8 @@
-package net.enjoy.springboot.registrationlogin.controller;
+package example.project.pai.controller;
 
 import jakarta.validation.Valid;
-import net.enjoy.springboot.registrationlogin.entity.ToDo;
-import net.enjoy.springboot.registrationlogin.service.ToDoService;
-import org.slf4j.LoggerFactory;
+import example.project.pai.entity.ToDo;
+import example.project.pai.service.ToDoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;

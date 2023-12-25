@@ -1,10 +1,10 @@
-package net.enjoy.springboot.registrationlogin;
+package example.project.pai;
 
-import net.enjoy.springboot.registrationlogin.dto.UserDto;
-import net.enjoy.springboot.registrationlogin.entity.ToDo;
-import net.enjoy.springboot.registrationlogin.repository.ToDoRepository;
-import net.enjoy.springboot.registrationlogin.repository.UserRepository;
-import net.enjoy.springboot.registrationlogin.service.UserService;
+import example.project.pai.dto.UserDto;
+import example.project.pai.repository.UserRepository;
+import example.project.pai.entity.ToDo;
+import example.project.pai.repository.ToDoRepository;
+import example.project.pai.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import java.time.LocalDate;
 
 @SpringBootApplication
-public class RegistrationLoginApplication {
+public class ProjectPAIApplication {
 
     @Bean
     public CommandLineRunner initDatabase(UserService userService, UserRepository userRepository,
@@ -42,6 +42,6 @@ public class RegistrationLoginApplication {
         };
     }
     public static void main(String[] args) {
-        SpringApplication.run(RegistrationLoginApplication.class, args);
+        SpringApplication.run(ProjectPAIApplication.class, args);
     }
 }

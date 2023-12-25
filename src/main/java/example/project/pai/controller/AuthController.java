@@ -1,9 +1,9 @@
-package net.enjoy.springboot.registrationlogin.controller;
+package example.project.pai.controller;
 
+import example.project.pai.dto.UserDto;
 import jakarta.validation.Valid;
-import net.enjoy.springboot.registrationlogin.dto.UserDto;
-import net.enjoy.springboot.registrationlogin.entity.User;
-import net.enjoy.springboot.registrationlogin.service.UserService;
+import example.project.pai.entity.User;
+import example.project.pai.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

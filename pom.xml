@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.enjoy.springboot</groupId>
-    <artifactId>registration-login</artifactId>
+    <artifactId>project-PAI</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>registration-login</name>
     <description>Project for Spring Boot</description>

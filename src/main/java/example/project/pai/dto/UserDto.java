@@ -1,4 +1,4 @@
-package net.enjoy.springboot.registrationlogin.dto;
+package example.project.pai.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

@@ -1,4 +1,4 @@
-package net.enjoy.springboot.registrationlogin.config;
+package example.project.pai.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

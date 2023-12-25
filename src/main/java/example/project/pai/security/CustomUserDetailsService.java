@@ -1,7 +1,7 @@
-package net.enjoy.springboot.registrationlogin.security;
+package example.project.pai.security;
 
-import net.enjoy.springboot.registrationlogin.entity.User;
-import net.enjoy.springboot.registrationlogin.service.UserService;
+import example.project.pai.service.UserService;
+import example.project.pai.entity.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

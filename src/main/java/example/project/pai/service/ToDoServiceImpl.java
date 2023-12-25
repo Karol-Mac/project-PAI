@@ -1,9 +1,9 @@
-package net.enjoy.springboot.registrationlogin.service;
+package example.project.pai.service;
 
-import net.enjoy.springboot.registrationlogin.entity.ToDo;
-import net.enjoy.springboot.registrationlogin.entity.User;
-import net.enjoy.springboot.registrationlogin.repository.ToDoRepository;
-import net.enjoy.springboot.registrationlogin.repository.UserRepository;
+import example.project.pai.repository.UserRepository;
+import example.project.pai.entity.ToDo;
+import example.project.pai.entity.User;
+import example.project.pai.repository.ToDoRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 

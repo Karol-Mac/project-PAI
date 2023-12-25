@@ -1,6 +1,6 @@
-package net.enjoy.springboot.registrationlogin.service;
+package example.project.pai.service;
 
-import net.enjoy.springboot.registrationlogin.entity.ToDo;
+import example.project.pai.entity.ToDo;
 
 import java.util.List;
 
