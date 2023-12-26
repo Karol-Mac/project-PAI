@@ -18,7 +18,9 @@ Stworzyłem prostą aplikację zarządzającą todo
 
 
 # Obsługa aplikacji
-Aby móc uruchomić aplikację należy najpierw skonfigurować połączenie z bazą danych
+Projekt jest pisany w javie 20 - sugeruje zainstalować tą wersję (lub nowszą), 
+_w przypadku użycia starszej <br> wersji wszystko powinno być okej, ale nie mogę tego zagwarantowac_
+Aby móc uruchomić aplikację należy  najpierw skonfigurować połączenie z bazą danych
 Robi się to poprzez plik application.properties (src/main/resources/application.properties)
 
 Należy skonfigurować następujące parametry:
@@ -28,7 +30,8 @@ Należy skonfigurować następujące parametry:
 
 W przypadku kozystania z xamppa należy:
 1. Uruchomić xamppa - server apache i mysql
-2. utworzyc nową baze danych (nazwa wedlug uznania - w moim przypadku "project")
+2. utworzyc nową baze danych (nazwa wedlug uznania - w moim przypadku "project") 
+```create databse project```
 3. ustawic parametr spring.datasource.url - wystarczy zmienic ostatni człon linku na nazwę utworzonej przez siebie bazy danych
 4. ustawic parametr spring.datasource.username na nazwę użytkownika, który będzie komunikował się z bazą danych (domyślny użytkownik to root i to sugeruje zostawic)
 5. ustawic parametr spring.datasource.password na haslo uzytkownika podanego punkt wyzej (jesli uzytkownikiem jest root - haslo jest niepotrzebne - parametr mozna usunac)
@@ -72,3 +75,14 @@ nalezy rozpoczynac wpisywanie jakichkolwiek adresów
 | /delete-todo | GET    | Usuwa zadanie o określonym identyfikatorze   |
 | /update-todo | GET    | Wyświetla stronę aktualizacji zadania        |
 | /update-todo | POST   | Aktualizuje zadanie                          |
+
+\
+\
+**Przykładowe urzycie aplikacji:**\
+localhost:8080/register - przejście do strony rejestracji użytkownika\
+Po udanej rejestracji należy przejść do strony:\
+localhost:8080/login - przejście do strony logowania\
+Po zalogowaniu się uzytkownik zostaje przeniesiony do strony powitalnej,<br>
+następnie może przejść do strony zarządzającej todo's\
+localhost:8080/list-todos\
+skąd może wykonywać różne operacje na swoich todo
