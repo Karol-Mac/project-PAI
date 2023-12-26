@@ -18,7 +18,6 @@ public class ToDo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Size(min=5, message="Enter atleast 5 characters")
     private String description;
 
     private LocalDate targetDate;

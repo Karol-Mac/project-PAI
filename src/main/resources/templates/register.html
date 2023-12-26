@@ -58,6 +58,7 @@
                                 placeholder="Enter username"
                                 th:field="*{username}"
                                 type="text"
+                                required="required"
                         />
                         <p th:errors = "*{username}" class="text-danger"
                            th:if="${#fields.hasErrors('username')}"></p>
@@ -72,6 +73,7 @@
                                 placeholder="Enter email address"
                                 th:field="*{email}"
                                 type="email"
+                                required="required"
                         />
                         <p th:errors = "*{email}" class="text-danger"
                            th:if="${#fields.hasErrors('email')}"></p>
@@ -86,6 +88,7 @@
                                 placeholder="Enter password"
                                 th:field="*{password}"
                                 type="password"
+                                required="required"
                         />
                         <p th:errors = "*{password}" class="text-danger"
                            th:if="${#fields.hasErrors('password')}"></p>
