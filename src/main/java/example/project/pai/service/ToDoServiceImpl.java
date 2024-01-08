@@ -24,9 +24,7 @@ public class ToDoServiceImpl implements ToDoService{
 
     @Override
     public List<ToDo> getAllToDos() {
-
         return toDoRepository.findByUser(getLoggedInUser());
-
     }
 
     @Override
@@ -43,7 +41,7 @@ public class ToDoServiceImpl implements ToDoService{
     @Override
     public ToDo generateEmptyToDo() {
         return new ToDo(0, "",LocalDate.now().plusYears(1),
-                        false, getLoggedInUser());
+                        false, 0,getLoggedInUser());
     }
 
     @Override

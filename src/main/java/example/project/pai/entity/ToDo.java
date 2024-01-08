@@ -24,6 +24,8 @@ public class ToDo {
 
     private boolean done;
 
+    private int priority;
+
     @ManyToOne
     @JoinColumn(name = "users_id")
     private User user;

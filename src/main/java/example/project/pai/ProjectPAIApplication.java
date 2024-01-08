@@ -29,11 +29,11 @@ public class ProjectPAIApplication {
                 userService.saveUser(user2);
 
                 ToDo todo1 = new ToDo(1L, "zaliczyc PAI",
-                        LocalDate.of(2024, 1, 29), false,
+                        LocalDate.of(2024, 1, 29), false,0,
                         userRepository.findByEmail("student@pollub.edu.pl").get());
 
                 ToDo todo2 = new ToDo(0L, "straszyc przed sesja",
-                        LocalDate.of(2024, 1, 29), false,
+                        LocalDate.of(2024, 1, 29), false, 0,
                         userRepository.findByEmail("prowadzocy@pollub.pl").get());
 
                 toDoRepository.save(todo1);

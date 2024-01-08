@@ -13,7 +13,7 @@
     <h1 class="mb-4">Add Todo</h1>
 
     <form action="/add-todo" method="post" th:object="${todo}">
-        <div class="mb-3">
+        <div class="mb-3 small">
             <label for="description" class="form-label">Description:</label>
             <input
                     type="text"
@@ -28,6 +28,20 @@
         </div>
 
         <div class="mb-3">
+            <label for="priority" class="form-label">Priority:</label>
+            <input
+                    type="number"
+                    class="form-control"
+                    id="priority"
+                    name="priority"
+                    th:field="*{priority}"
+                    required="required"/>
+
+            <p th:errors = "*{priority}" class="text-danger"
+               th:if="${#fields.hasErrors('priority')}"></p>
+        </div>
+
+        <div class="mb-3">
             <label for="targetDate" class="form-label">Target Date:</label>
             <input
                     type="text"
@@ -38,9 +52,23 @@
             <p th:errors = "*{targetDate}" class="text-danger"
                th:if="${#fields.hasErrors('targetDate')}"></p>
         </div>
-        <input type="hidden" th:field="*{id}"/>
-        <input type="hidden" th:field="*{done}"/>
 
+        <div class="mb-3">
+            <label for="done" class="form-label">Done:</label>
+            <select
+                    class="form-check"
+                    id="done"
+                    name="done"
+                    th:field="*{done}">
+                <option th:value="false">false</option>
+                <option th:value="true">true</option>
+            </select>
+
+            <p th:errors = "*{done}" class="text-danger"
+               th:if="${#fields.hasErrors('done')}"></p>
+        </div>
+
+        <input type="hidden" th:field="*{id}"/>
 
         <button type="submit" class="btn btn-primary">Add Todo</button>
     </form>
